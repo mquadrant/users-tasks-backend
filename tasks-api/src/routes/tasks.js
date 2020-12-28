@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+import taskController from '../controllers/taskController'
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/:userId', taskController.list);
+router.post('/create', taskController.create);
+router.post('/update/:userId/:taskId', taskController.update);
+router.post('/delete', taskController.delete);
 
 module.exports = router;
