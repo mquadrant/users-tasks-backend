@@ -1,12 +1,23 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import createError from 'http-errors';
+import express from 'express';
+import path from 'path';
+import ora from 'ora';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import MakeDb from './database/connection';
+const mongoThrobber = ora();
 
-const indexRouter = require('../routes/index');
+import indexRouter from './routes/index';
+import config from './config';
 
 const app = express();
+
+new MakeDb()
+  .then(() => {
+    mongoThrobber.succeed(`${config.app_name}-DB  Ready!`)
+  }).catch((err) => {
+    mongoThrobber.fail(`Could not connect to ${config.app_name}-DB because of ${err}`)
+  })
 
 app.use(logger('dev'));
 app.use(express.json());
