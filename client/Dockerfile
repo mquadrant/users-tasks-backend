@@ -1,8 +1,9 @@
 # stage1 - build react app first 
 FROM node:12.18.2-alpine as build
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
 COPY ./package.json /app
+RUN yarn install
+RUN npm rebuild node-sass
 COPY . /app
 RUN yarn run build
 
