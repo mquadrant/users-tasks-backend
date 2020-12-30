@@ -4,7 +4,7 @@ import TaskModel from '../../database/models/task';
 import Joi from 'joi';
 import Exception from '../../utils/Exception';
 
-export default class TaskList extends BaseService {
+export default class TaskDelete extends BaseService {
 
     constructor(...args) {
         super(...args);
@@ -12,6 +12,7 @@ export default class TaskList extends BaseService {
 
     async validate(data) {
         const ruleSchema = Joi.object({
+            task_id: Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'task id').required(),
             user_id: Joi.string().regex(/^[0-9a-fA-F]{24}$/, 'user id').required()
         })
         const { error } = ruleSchema.validate(data)
@@ -24,9 +25,9 @@ export default class TaskList extends BaseService {
     }
 
     async execute(data) {
-        const tasks = await TaskModel.find({ user_id: data.user_id })
+        const task = await TaskModel.findOneAndDelete({ _id: data.task_id, user_id: data.user_id })
         return {
-            data: tasks.map(task => dumpTask(task))
+            data: task
         }
     }
 

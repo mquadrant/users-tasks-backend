@@ -1,10 +1,10 @@
 import BaseService from '../Base';
-import dumpTask from '../../util/dump';
+import dumpTask from '../../utils/dump';
 import TaskModel from '../../database/models/task';
 import Joi from 'joi';
-import Exception from '../../util/Exception';
+import Exception from '../../utils/Exception';
 
-export default class TaskList extends BaseService {
+export default class TaskUpdate extends BaseService {
 
     constructor(...args) {
         super(...args);
@@ -18,7 +18,7 @@ export default class TaskList extends BaseService {
             state: Joi.string().valid('todo', 'done')
         })
         const { error } = ruleSchema.validate(data)
-        if (error === null) return Promise.resolve(data)
+        if (!error) return Promise.resolve(data)
         const exception = new Exception({
             code: error.message,
             fields: error
@@ -29,7 +29,7 @@ export default class TaskList extends BaseService {
     async execute(data) {
         const { user_id, task_id } = data
         const updateQuery = { ...data }
-        const task = await TaskModel.findOneAndUpdate({ user_id, task_id }, updateQuery, { new: true })
+        const task = await TaskModel.findOneAndUpdate({ user_id, _id: task_id }, updateQuery, { new: true })
         return {
             data: task
         }
