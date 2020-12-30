@@ -7,7 +7,8 @@ module.exports = class Database {
 
         return mongoose.connect(this.connection, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useFindAndModify: true
         });
     }
 };

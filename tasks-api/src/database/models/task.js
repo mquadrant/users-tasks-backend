@@ -11,7 +11,6 @@ const schema = new Schema(
             type: Schema.Types.String,
             required: true,
             trim: true,
-            maxlength: 100,
         },
         state: {
             type: Schema.Types.String,

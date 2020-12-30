@@ -14,7 +14,7 @@ const app = express();
 
 new MakeDb()
   .then(() => {
-    mongoThrobber.succeed(`${config.app_name}-DB  Ready!`)
+    mongoThrobber.succeed(`${config.app_name}-DB  Ready! ${config.port}`)
   }).catch((err) => {
     mongoThrobber.fail(`Could not connect to ${config.app_name}-DB because of ${err}`)
   })
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/api', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
