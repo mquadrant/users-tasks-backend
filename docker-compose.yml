@@ -16,7 +16,7 @@ services:
      
     # Proxies request to internal services
     reverse-proxy:
-        image: nginx:latest
+        build: ./reverse_proxy
         ports:
           - 80:80
         volumes:
