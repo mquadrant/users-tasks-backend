@@ -7,10 +7,12 @@ services:
         context: ./client
         dockerfile: Dockerfile.dev
       volumes:
-        - './client:/app'
-        - '/app/node_modules'
+        - ./client:/app
+        - /app/node_modules
       ports:
         - 3000:3000
+      stdin_open: true
+      restart: on-failure
      
     # Proxies request to internal services
     reverse-proxy:
