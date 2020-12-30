@@ -4,7 +4,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY ./package.json /app
 COPY . /app
-RUN npm run build
+RUN yarn run build
 
 # stage 2 - build the final image and copy the react build files
 FROM nginx:latest as production-stage
