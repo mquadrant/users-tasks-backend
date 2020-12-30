@@ -1,12 +1,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
  
-# USER'S TASK MANAGEMENT
+# USER'S TASK APP
 
-> User's Task management app helps to manage user's task
+> User's Task App helps to manage user's task
 
-> [users service](https://user--serv.herokuapp.com/).
+> [Users Api](http://ec2-18-191-17-243.us-east-2.compute.amazonaws.com:5001/api).
 
-> [tasks service](https://task--serv.herokuapp.com/).
+> [Tasks Api](http://ec2-18-191-17-243.us-east-2.compute.amazonaws.com:5000/api).
 
 ## Architectural Diagram
 
@@ -55,6 +55,10 @@ sudo docker-compose -f docker-compose.prod.yml up -d
 * AWS EC2
 * NGINX
 * GIT
+
+#### Frontend
+* React
+* Webpack
 
 ## API Documentation
 
