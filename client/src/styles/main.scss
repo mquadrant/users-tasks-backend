@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing: inherit;
+}
+
+html,body{
+    box-sizing: border-box;
+		background-color: #e8eaed;
+    font-family: Raleway, sans-serif;
+    min-height:100%;
+    margin: 0;
+}
+
+@font-face {
+font-family: "raleway";
+src: url("../fonts/Raleway-Regular.ttf") format("ttf");
+font-weight: normal;
+font-style: normal;
+}
+@font-face {
+font-family: "raleway";
+src: url("../fonts/Raleway-Thin.ttf") format("ttf");
+font-weight: lighter;
+font-style: normal;
+}
+
+
+#popup-root{
+    .popup-overlay{
+        background-color: rgba(91, 114, 130,0.3);
+    }
+}

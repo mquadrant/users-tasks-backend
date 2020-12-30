@@ -1,0 +1,46 @@
+.card{
+    padding: 2px 0;
+    cursor: pointer;
+    &:hover{
+        background-color: #f8fbff;
+    }
+    .inner-card{
+        display: flex;
+        align-items: center;
+        .image-round{
+            width: 42px;
+            height: 42px;
+            border-radius: 100%;
+            // background-color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span{
+                color: white;
+                mix-blend-mode: difference;
+            }
+        }
+        .details{
+            margin-left: 15px;
+            .created{
+                font-size: 12px;
+                color: #454545a9;
+            }
+        }
+        .remove{
+            margin-left: 15px;
+            svg{
+                color: #f92200;
+            }
+        }
+        .update{
+            margin-left: auto;
+        }
+        .view{
+            margin-left: 15px;
+            svg{
+                color: #50cd6b;
+            }
+        }
+    }
+}

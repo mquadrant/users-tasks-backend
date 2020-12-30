@@ -1,0 +1,45 @@
+version: "3.8"
+
+services: 
+
+    client:
+      build:
+        context: ./client
+        dockerfile: Dockerfile.dev
+      volumes:
+        - ./client:/app
+        - /app/node_modules
+      ports:
+        - 3000:3000
+      stdin_open: true
+      restart: on-failure
+     
+    # Proxies request to internal services
+    reverse-proxy:
+        image: nginx:latest
+        ports:
+          - 80:80
+        volumes:
+          - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+        depends_on:
+            - users
+            - tasks
+            - client
+    
+    users:
+        build: ./users-api
+        ports:
+          - 5001:5001
+        volumes:
+          - ./users-api:/src
+          - /src/node_modules
+        restart: on-failure
+
+    tasks:
+        build: ./tasks-api
+        ports:
+          - 5000:5000
+        volumes:
+          - ./tasks-api:/src
+          - ./src/node_modules
+        restart: on-failure

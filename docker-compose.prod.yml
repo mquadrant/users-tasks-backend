@@ -1,0 +1,39 @@
+version: "3.8"
+
+services: 
+
+    client:
+      build: ./client
+      ports:
+        - 3000:3000
+     
+    # Proxies request to internal services
+    reverse-proxy:
+        image: nginx:latest
+        ports:
+          - 80:80
+        volumes:
+          - ./client/build:/srv/www/static
+          - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+        depends_on:
+            - users
+            - tasks
+            - client
+    
+    users:
+        build: ./users-api
+        ports:
+          - 5001:5001
+        volumes:
+          - ./users-api:/src
+          - /src/node_modules
+        restart: on-failure
+
+    tasks:
+        build: ./tasks-api
+        ports:
+          - 5000:5000
+        volumes:
+          - ./tasks-api:/src
+          - ./src/node_modules
+        restart: on-failure
