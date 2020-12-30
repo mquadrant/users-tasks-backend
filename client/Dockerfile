@@ -6,6 +6,7 @@ RUN yarn install
 RUN npm rebuild node-sass
 COPY . /app
 RUN yarn run build
+CMD ["yarn", "run", "start"]
 
 # stage 2 - build the final image and copy the react build files
 FROM nginx:latest as production-stage
